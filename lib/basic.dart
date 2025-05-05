@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class BasicPage extends StatelessWidget {
   @override
@@ -45,6 +46,20 @@ class BasicPage extends StatelessWidget {
               );
             },
             child: Text("Container")
+          ),
+
+          SizedBox(
+            height: 10,
+          ),
+
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => IconPage())
+              );
+            },
+            child: Text("Icon")
           ),
 
           SizedBox(
@@ -721,8 +736,8 @@ class _ImagePageState extends State<ImagePage> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      if(_image_height + 10 >= 350) {
-                        _image_height = 350;
+                      if(_image_height + 10 >= 206) {
+                        _image_height = 206;
                       }
                       else {
                         _image_height += 10;
@@ -762,8 +777,8 @@ class _ImagePageState extends State<ImagePage> {
                 IconButton(
                   onPressed: () {
                     setState(() {
-                      if(_image_width + 10 >= 206) {
-                        _image_width = 206;
+                      if(_image_width + 10 >= 350) {
+                        _image_width = 350;
                       }
                       else {
                         _image_width += 10;
@@ -865,9 +880,33 @@ class _ContainerPageState extends State<ContainerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Center(),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+          ],
+        ),
+      ),
     );
   }
 }
 
 //------------------------------------------------------------
+
+class IconPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _IconPageState();
+  }
+}
+
+class _IconPageState extends State<IconPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      
+    );
+  }
+}
