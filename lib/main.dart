@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Scaffold_page.dart';
+import 'basic.dart';
 
 void main() {
   runApp(MyApp());
@@ -35,6 +36,20 @@ class HomeScreen extends StatelessWidget {
               );
             },
             child: Text("Scaffold")
+          ),
+
+          SizedBox(
+            height: 10,
+          ),
+
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => BasicPage())
+              );
+            },
+            child: Text("Basic")
           ),
         ],
       ),
