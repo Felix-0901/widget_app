@@ -102,9 +102,7 @@ class _TextPageState extends State<TextPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Text Page"),
-      ),
+      appBar: AppBar(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.sort_by_alpha), label: "Single"),
@@ -902,11 +900,152 @@ class IconPage extends StatefulWidget {
 }
 
 class _IconPageState extends State<IconPage> {
+  double _icon_size = 24;
+  String _icon_status = "";
+
+  Future<void> _onPressed() async {
+    setState(() {
+      _icon_status = "被點擊";
+    });
+
+    await Future.delayed(Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          _icon_status = "";
+        });
+      }
+    });
+  }
+
+  Future<void> _onLongPress() async {
+    setState(() {
+      _icon_status = "被長按";
+    });
+
+    await Future.delayed(Duration(seconds: 2), () {
+      if (mounted) {
+        setState(() {
+          _icon_status = "";
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 150,
+              width: 150,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 2),
+              ),
+              child: IconButton(
+                icon: Icon(
+                  Icons.star
+                ),
+                onPressed: () {
+                  _onPressed();
+                },
+                onLongPress: () {
+                  _onLongPress();
+                },
+                iconSize: _icon_size,
+              )
+            ),
+            SizedBox(
+              height: 20,
+            ),
+
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if(_icon_size - 4 <= 4) {
+                        _icon_size = 4;
+                      }
+                      else {
+                        _icon_size -= 4;
+                      }
+                    });
+                  },
+                  icon: Icon(Icons.do_not_disturb_on),
+                ),
+
+                Text(
+                  "Size",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if(_icon_size + 4 >= 100) {
+                        _icon_size = 100;
+                      }
+                      else {
+                        _icon_size += 4;
+                      }
+                    });
+                  },
+                  icon: Icon(Icons.add_circle),
+                )
+              ]
+            ),
+
+            SizedBox(
+              height: 20,
+            ),
+
+            Container(
+              height: 100,
+              width: 150,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 2),
+              ),
+              padding: EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "狀態：",
+                        style: TextStyle(
+                          fontSize: 16
+                        ),
+                      )
+                    ],
+                  ),
+                  
+                  SizedBox(
+                    height: 10,
+                  ),
+
+                  Text(
+                    _icon_status,
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
